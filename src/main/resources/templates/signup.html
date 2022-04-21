@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>about page</title>
+</head>
+<body>
+
+	<section>
+		<div class="signup_prt">
+
+
+			<div th:if="${session.message}"
+				th:classappend="${session.message.type}" class="alert" role="alert">
+
+				<div th:text="${session.message.content}"></div>
+				<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+			</div>
+
+
+			<form novalidate action="" th:action="@{/processSignupForm}"
+				method="post" class="col-md-12" th:object="${customer}">
+				<h1>Create your account</h1>
+				<div class="form-floating mb-3">
+					<input type="text" class="form-control" id="floatingInput"
+						placeholder="name" name="name"
+						th:classappend="${#fields.hasErrors('name')?'is-invalid':''} ">
+					<label for="floatingInput">Your Name</label>
+					<div class="invalid-feedback"
+						th:each="e: ${#fields.errors('name')} " th:text="${e}"></div>
+				</div>
+				<div class="form-floating mb-3">
+					<input type="email" class="form-control" id="floatingInput"
+						placeholder="name@example.com"
+						oninvalid="this.setCustomValidity('Please, Enter your valid email')"
+						oninput="setCustomValidity('')" name="email"
+						th:value="${customer.email}"> <label for="floatingInput">Email
+						address</label>
+
+				</div>
+				<div class="form-floating">
+					<input type="password" class="form-control" id="floatingPassword"
+						placeholder="Password"
+						oninvalid="this.setCustomValidity('Please, Enter your password')"
+						oninput="setCustomValidity('')" name="password"> <label
+						for="floatingPassword">Password</label>
+				</div>
+				<div class="signup_check_prt d-flex align-items-center">
+					<div>
+						<input type="checkbox" id="_checkbox">
+						 <label for="_checkbox" class="checkbox_lab">
+							 <span id="tick_mark"> </span>
+						</label>
+					</div>
+					<label class="terms_lab"> Agree terms and conditions</label>
+				</div>
+				<button type="submit" class="btn signup_btn btn-8">Let's
+					Get Dive Into</button>
+			</form>
+
+
+		</div>
+
+	</section>
+
+</body>
+</html>
