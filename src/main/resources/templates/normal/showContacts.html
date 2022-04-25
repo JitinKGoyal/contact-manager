@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>home page</title>
+</head>
+<body>
+
+	<section>
+
+		<h2 class="text-center text-white">Your contacts</h2>
+
+
+		<table class="table table-striped table-dark">
+			<thead>
+				<tr>
+					<th scope="col">UNIQUE ID</th>
+					<th scope="col">NAME</th>
+					<th scope="col">EMAIL</th>
+					<th scope="col">PHONE</th>
+					<th scope="col">ACTION</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="c: ${contacts}">
+					<th scope="row" th:text="${'MYID'+ c.id}" ></th>
+					<td th:text="${c.name}"></td>
+					<td th:text="${c.email}"></td>
+					<td th:text="${c.phone}"></td>
+					<td><a><i class="fa fa-edit" style='color: #ffffff'></i></a> <a><i
+							class="fa fa-trash mx-2" style='color: #ffffff'></i></a></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<nav aria-label="...">
+			<ul class="pagination">
+				<li class="page-item"
+					th:classappend="${currentPage == 0?'disabled':''}"><a
+					class="page-link" th:href="@{${currentPage-1}}" tabindex="-1">Previous</a></li>
+
+				<li th:each="i : ${#numbers.sequence(1,totalPage)}"
+					class="page-item"
+					th:classappend="${currentPage == i-1?'active':''}"><a
+					th:text="${i}" class="page-link" th:href="@{ ${i-1}}"></a></li>
+
+				<li class="page-item"
+					th:classappend="${currentPage == totalPage-1?'disabled':''}"><a
+					class="page-link" th:href="@{${currentPage+1}}">Next</a></li>
+			</ul>
+		</nav>
+	</section>
+
+</body>
+</html>

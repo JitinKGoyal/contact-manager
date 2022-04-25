@@ -15,6 +15,8 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Hubballi&display=swap"
 	rel="stylesheet">
+	
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link rel="stylesheet" th:href="@{/css/style.css}" />
 <title>Contact Manager</title>
@@ -22,7 +24,7 @@
 <body>
 
 
-	<ul class="nav justify-content-center text-uppercase nav_prt">
+	<!-- <ul class="nav justify-content-center text-uppercase nav_prt">
 		<li class="nav-item">
 			<div class="my_floating">
 				<a class="nav-link active" aria-current="page"
@@ -31,11 +33,11 @@
 		</li>
 
 
-		<!-- 	<li class="nav-item">
+			<li class="nav-item">
 			<div class="my_floating">
 				<a class="nav-link" th:href="@{/about}">about</a>
 			</div>
-		</li> -->
+		</li>
 		<li class="nav-item">
 			<div class="my_floating">
 				<a class="nav-link" href="/customer/index"
@@ -48,23 +50,24 @@
 			</div>
 		</li>
 
-	</ul>
+	</ul> -->
 
 
 	<div>
 		<div class="sidebar-container">
-			<div class="sidebar-logo">Project Name</div>
+			<div class="sidebar-logo">Contact Manager</div>
 			<ul class="sidebar-navigation">
-				<li class="header">Navigation</li>
+				<li> <h3 class="px-4 py-2 mb-0 text-uppercase" th:text="${customer.name}"></h3></li>
+				<li class="header" th:text="${customer.email}"></li>
 				<li><a href="#" th:href="@{/customer/index}"> <i
 						class="fa fa-home" aria-hidden="true"></i> Homepage
 				</a></li>
 				<li><a th:href="@{/customer/addContact}"> <i
 						class="fa fa-tachometer" aria-hidden="true"></i> Add contact
 				</a></li>
-				<li class="header">Another Menu</li>
-				<li><a href="#"> <i class="fa fa-users" aria-hidden="true"></i>
-						Friends
+				<!-- 	<li class="header">Another Menu</li> -->
+				<li><a href="#" th:href="@{/customer/showContacts/0}"> <i
+						class="fa fa-users" aria-hidden="true"></i> Show my contacts
 				</a></li>
 				<li><a href="#"> <i class="fa fa-cog" aria-hidden="true"></i>
 						Settings

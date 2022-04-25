@@ -430,6 +430,7 @@ body {
 
 .form-content .form-items {
     border: 3px solid #fff;
+    box-shadow:0 0 20px 10px black ;
     padding: 40px;
     display: inline-block;
     width: 100%;
@@ -474,7 +475,7 @@ body {
     text-align: left;
     border: 0;
     outline: 0;
-    border-radius: 6px;
+    border-radius: 0px;
     background-color: #fff;
     font-size: 15px;
     font-weight: 300;

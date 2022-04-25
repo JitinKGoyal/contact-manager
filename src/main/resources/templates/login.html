@@ -18,13 +18,20 @@
 
 			<form action="" th:action="@{/login}" method="post" class="col-md-12">
 
-				<input type="text" name="username" placeholder="username"> <input
-					type="password" name="password" placeholder="password">
+				<div class="form-floating mb-3">
+					<input type="text" class="form-control" id="floatingInput"
+						placeholder="username" name="username"> <label
+						for="floatingInput">Your username</label>
+				</div>
+				<div class="form-floating mb-3">
+					<input type="password" class="form-control" id="floatingInput"
+						placeholder="password" name="password"> <label
+						for="floatingInput">Your password</label>
+				</div>
 
 				<button type="submit" class="btn signup_btn btn-8">Let's
 					Get Dive Into</button>
 			</form>
-
 
 		</div>
 

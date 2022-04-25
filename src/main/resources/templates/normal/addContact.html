@@ -8,6 +8,13 @@
 <body>
 
 	<section>
+		<div th:if="${session.message}">
+			<div th:classappend="${'alert-'+session.message.type}" class="alert"
+				role="alert" th:text="${session.message.content}"></div>
+
+			<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+		</div>
+
 		<div class="form-body">
 			<div class="row">
 				<div class="form-holder">
@@ -17,8 +24,7 @@
 
 							<form class="requires-validation" th:object="${contact}"
 								enctype="multipart/form-data"
-								th:action="@{/customer/addContactProcess}" method="post"
-								>
+								th:action="@{/customer/addContactProcess}" method="post">
 
 								<div class="col-md-12">
 									<input class="form-control" type="text" name="name"
@@ -46,12 +52,11 @@
 									<input class="form-control" type="text" name="work"
 										placeholder="Work" required>
 									<div class="valid-feedback">Work field is valid!</div>
-									<div class="invalid-feedback">Work field cannot be
-										blank!</div>
+									<div class="invalid-feedback">Work field cannot be blank!</div>
 								</div>
 								<div class="col-md-12">
 									<input class="form-control" type="text" name="phone"
-										placeholder="Phone Number" required>
+										placeholder="Phone Number" required maxlength=10>
 									<div class="valid-feedback">phone field is valid!</div>
 									<div class="invalid-feedback">phone field cannot be
 										blank!</div>
@@ -60,7 +65,7 @@
 								<div class="col-md-12 mt-3">
 									<input class="form-control" type="file" name="profileImage"
 										placeholder="image" required>
-					
+
 								</div>
 								<div class="col-md-12 mt-3">
 									<input class="form-control" type="text" name="description"
