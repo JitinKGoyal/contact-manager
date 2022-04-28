@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>about page</title>
+</head>
+<body>
+
+	<section>
+
+		<div class="form-body">
+			<div class="row">
+				<div class="form-holder">
+					<div class="form-content">
+						<div class="form-items query_itm">
+							<h3 class="text-center ">Have a query</h3>
+
+							<form class="requires-validation"
+								th:action="@{/customer/processQuery}" method="post"
+									enctype="multipart/form-data"
+									>
+
+								<div class="col-md-12">
+									<input class="form-control" type="text" name="subject"
+										placeholder="Subject" required>
+								</div>
+
+								<div class="col-md-12 mt-3">
+									<textarea class="form-control" name="content"
+										placeholder="description" required></textarea>
+								</div>
+								<div class="col-md-12 mt-3">
+									<input class="form-control" type="file" name="file"
+										placeholder="description">
+								</div>
+								<p>Maximum size limit of file is 10 MB</p>
+
+								<div class="form-button mt-3">
+									<button id="submit" type="submit" class="btn btn-light px-4">Send</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+
+</body>
+
+
+</html>

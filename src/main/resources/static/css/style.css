@@ -540,10 +540,27 @@ body {
 /* add contact form e */
 
 
+.profile_img{
+	
+	height: 30px;
+	width: 30px;
+	object-fit:cover;
+	border-radius: 50%;
+	margin-right: 10px
+	
+	
+}
 
 
 
+.query_itm{ 
+	border: 1px dashed white !important;
+	background: linear-gradient(to right,#ff0063,purple);
+}
 
+.query_itm input {
+	border-radius: 6px !important;
+}
 
 
 

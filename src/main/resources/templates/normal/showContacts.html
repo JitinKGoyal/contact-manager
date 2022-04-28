@@ -23,13 +23,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="c: ${contacts}">
+				<tr th:each="c: ${contacts}" >
 					<th scope="row" th:text="${'MYID'+ c.id}" ></th>
-					<td th:text="${c.name}"></td>
+					<td > <img class="profile_img" th:src="@{'/img/' + ${c.imageUrl}}"> <span th:text="${c.name}" ></span> </td>
 					<td th:text="${c.email}"></td>
 					<td th:text="${c.phone}"></td>
-					<td><a><i class="fa fa-edit" style='color: #ffffff'></i></a> <a><i
-							class="fa fa-trash mx-2" style='color: #ffffff'></i></a></td>
+					<td>
+						<a th:href="@{'/customer/update/' + ${c.id}}"><i class="fa fa-edit" style='color: #ffffff'></i></a>
+					 	<a href="#" th:onclick="|deleteContact(${c.id})|"><i class="fa fa-trash mx-2" style='color: #ffffff'></i></a>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -50,7 +52,11 @@
 					class="page-link" th:href="@{${currentPage+1}}">Next</a></li>
 			</ul>
 		</nav>
+		
+		
 	</section>
+
+
 
 </body>
 </html>

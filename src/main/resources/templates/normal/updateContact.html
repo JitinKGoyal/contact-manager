@@ -24,18 +24,20 @@
 
 							<form class="requires-validation" th:object="${contact}"
 								enctype="multipart/form-data"
-								th:action="@{/customer/addContactProcess}" method="post">
+								th:action="@{/customer/processUpdate}" method="post">
 
+								<input type="hidden" name="id" th:value="${contact.id}">
 								<div class="col-md-12">
 									<input class="form-control" type="text" name="name"
-										placeholder="Full Name" required>
+										placeholder="Full Name" required th:value="${contact.name}">
 									<div class="valid-feedback">Username field is valid!</div>
 									<div class="invalid-feedback">Username field cannot be
 										blank!</div>
 								</div>
 								<div class="col-md-12">
 									<input class="form-control" type="text" name="nickName"
-										placeholder="Nick Name" required>
+										placeholder="Nick Name" required
+										th:value="${contact.nickName}">
 									<div class="valid-feedback">Nickname field is valid!</div>
 									<div class="invalid-feedback">Nickname field cannot be
 										blank!</div>
@@ -43,20 +45,22 @@
 
 								<div class="col-md-12">
 									<input class="form-control" type="email" name="email"
-										placeholder="E-mail Address" required>
+										placeholder="E-mail Address" required
+										th:value="${contact.email}">
 									<div class="valid-feedback">Email field is valid!</div>
 									<div class="invalid-feedback">Email field cannot be
 										blank!</div>
 								</div>
 								<div class="col-md-12">
 									<input class="form-control" type="text" name="work"
-										placeholder="Work" required>
+										placeholder="Work" required th:value="${contact.work}">
 									<div class="valid-feedback">Work field is valid!</div>
 									<div class="invalid-feedback">Work field cannot be blank!</div>
 								</div>
 								<div class="col-md-12">
 									<input class="form-control" type="text" name="phone"
-										placeholder="Phone Number" required maxlength=10>
+										placeholder="Phone Number" required maxlength=10
+										th:value="${contact.phone}">
 									<div class="valid-feedback">phone field is valid!</div>
 									<div class="invalid-feedback">phone field cannot be
 										blank!</div>
@@ -69,7 +73,8 @@
 								</div>
 								<div class="col-md-12 mt-3">
 									<input class="form-control" type="text" name="description"
-										placeholder="description" required>
+										placeholder="description" required
+										th:value="${contact.description}">
 									<div class="valid-feedback">description field is valid!</div>
 									<div class="invalid-feedback">description field cannot be
 										blank!</div>

@@ -88,22 +88,28 @@ public class CustomerDashboardController {
 			@RequestParam("profileImage") MultipartFile file) {
 
 		try {
-			File file2 = new ClassPathResource("static/img").getFile();
+			File file2 = new ClassPathResource("static/img/").getFile();
 
-			Path location = Paths.get(file2.getAbsolutePath() + File.pathSeparator + file.getOriginalFilename());
+			if (file.isEmpty()) {
 
-			Files.copy(file.getInputStream(), location, StandardCopyOption.REPLACE_EXISTING);
+				contact.setImageUrl("contact.png");
+			} else {
+
+				Path location = Paths.get(file2.getAbsolutePath() + File.separator + file.getOriginalFilename());
+				Files.copy(file.getInputStream(), location, StandardCopyOption.REPLACE_EXISTING);
+
+				contact.setImageUrl(file.getOriginalFilename());
+			}
 
 			String userName = principal.getName();
 			Customer customer = customerRepository.getCustomerByEmail(userName);
 
-			contact.setImageUrl(file.getOriginalFilename());
 			contact.setCustomer(customer);
 			customer.getContacts().add(contact);
 			customerRepository.save(customer);
 			alert = "success";
 			return new RedirectView("/customer/addContact");
-	 		
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			alert = "fail";
@@ -117,18 +123,71 @@ public class CustomerDashboardController {
 
 		String userName = principal.getName();
 		Customer customer = customerRepository.getCustomerByEmail(userName);
-		
+
 		Pageable pageable = PageRequest.of(pageNo, 10);
 
 		Page<Contact> contacts = contactRepository.getContactByUser(customer.getId(), pageable);
-		
 
 		m.addAttribute("contacts", contacts);
 		m.addAttribute("currentPage", pageNo);
 		m.addAttribute("totalPage", contacts.getTotalPages());
 		m.addAttribute("totalContacts", customer.getContacts().size());
-		
 
 		return "normal/showContacts";
 	}
+
+	@GetMapping("/update/{id}")
+	public String updateContact(@PathVariable("id") Integer id, Model m) {
+
+		Contact contact = contactRepository.findById(id).get();
+
+		m.addAttribute("contact", contact);
+		return "normal/updateContact";
+
+	}
+
+	@PostMapping("/processUpdate")
+	public RedirectView processUpdate(@ModelAttribute Contact contact, Principal principal,
+			@RequestParam("profileImage") MultipartFile file) {
+
+		try {
+			File file2 = new ClassPathResource("static/img/").getFile();
+
+			if (file.isEmpty()) {
+				String prevImg = contactRepository.findById(contact.getId()).get().getImageUrl();
+				contact.setImageUrl(prevImg);
+			} else {
+
+				Path location = Paths.get(file2.getAbsolutePath() + File.separator + file.getOriginalFilename());
+				Files.copy(file.getInputStream(), location, StandardCopyOption.REPLACE_EXISTING);
+
+				contact.setImageUrl(file.getOriginalFilename());
+			}
+
+			String userName = principal.getName();
+			Customer customer = customerRepository.getCustomerByEmail(userName);
+
+			contact.setCustomer(customer);
+			customer.getContacts().add(contact);
+			customerRepository.save(customer);
+			alert = "success";
+
+			return new RedirectView("/customer/showContacts/0");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			alert = "fail";
+
+			return new RedirectView("/customer/showContacts/0");
+		}
+
+	}
+	
+	
+	@GetMapping("/delete/{id}")
+	public String deleteContact(@PathVariable("id") int id) {
+		contactRepository.deleteById(id);
+		return "redirect:/customer/showContacts/0";
+	}
+
 }

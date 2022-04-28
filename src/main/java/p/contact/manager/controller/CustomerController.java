@@ -74,6 +74,7 @@ public class CustomerController {
 	public String customLogin(Model model) {
 		return "login";
 	}
+	
 }
 
 
